@@ -10,3 +10,9 @@
 - SQL Server
 
 String de Conexão a ser configurada no appsettings.json
+
+### Comandos CLI (Command Line Interface)
+- dotnet ef migrations add NewMigration -c DataDbContext
+- dotnet ef migrations script -c DataDbContext
+- dotnet ef migrations remove -c DataDbContext
+- dotnet ef database update
