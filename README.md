@@ -8,3 +8,5 @@
 - .NET 8
 - Entity Framework Core
 - SQL Server
+
+String de Conexão a ser configurada no appsettings.json
