@@ -9,7 +9,11 @@
 - Entity Framework Core
 - SQL Server
 
-String de Conexão a ser configurada no appsettings.json
+String de Conexão a ser configurada no appsettings.json.
+### Comandos para front-end
+- cd ProjetoMultas\web
+- npm install
+- ng serve
 
 ### Comandos para manipulação da Migration no CLI (Command Line Interface)
 - dotnet ef migrations add NewMigration -c DataDbContext
