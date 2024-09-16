@@ -4,7 +4,7 @@
 - Autenticação de usuários.
 - Permissão de usuário para edição e exclusão. 
 
-## Tecnologias usadas
+### Tecnologias usadas
 - SDK .NET 8
 - Entity Framework Core
 - SQL Server
