@@ -36,12 +36,12 @@ namespace Application.Services
             catch (Exception) { throw; }
         }
 
-        public async Task<string> Login(Login login)
+        public async Task<DadosUsuario> Login(Login login)
         {
             try
             {
                 var users = await _repository.SelectAsync();
-                var user = users.SingleOrDefault(u => u.Email == login.Id || u.UserName == login.Id) ?? throw new Exception("Usuário não encontrado.");
+                var user = users.SingleOrDefault(u => u.Email == login.Email || u.UserName == login.Email) ?? throw new Exception("Usuário não encontrado.");
                 
                 if (!await _userManager.IsEmailConfirmedAsync(user)) 
                     throw new Exception("Email não confirmado, acesse seu email para confirmar sua conta.");
@@ -53,14 +53,19 @@ namespace Application.Services
                     Log.Information("Usuário {0} efetuou o login", user.Id);
                     await _signInManager.SignInAsync(user, false);
 
-                    return await GerarJwt(user); 
+                    return new DadosUsuario()
+                    {
+                        Id = user.Id,
+                        Tipo = user.TipoUsuario,
+                        Token = await GerarJwt(user)
+                    };
                 }
                 else throw new Exception("Erro no login.");
             }
             catch (Exception) { throw; }
         }
 
-        public async Task<string> Register(Register registerModel)
+        public async Task<string> Register(CadastroUsuario registerModel)
         {
             try
             {
