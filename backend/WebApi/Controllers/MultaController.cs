@@ -56,7 +56,8 @@ namespace WebApi.Controllers
         {
             try
             {
-                _service.Delete(id);
+                var username = HttpContext.User.Identity.Name;
+                _service.Delete(id, username);
                 return CustomResponse();
             }
             catch (Exception ex)
@@ -88,7 +89,8 @@ namespace WebApi.Controllers
             try
             {
                 if (!ModelState.IsValid) return CustomResponse(ModelState);
-                var result = _service.Update<MultaDto, MultaDto, MultaValidator>(dto);
+                var username = HttpContext.User.Identity.Name;
+                var result = _service.Update<MultaDto, MultaDto, MultaValidator>(dto, username);
                 return CustomResponse(result);
             }
             catch (Exception ex)
