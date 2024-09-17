@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Enums;
 using FluentValidation;
 using Infrastructure.Context;
 using Infrastructure.Interfaces;
@@ -10,14 +11,16 @@ namespace Application.Services
     public class MultaService : IMultaService 
     {
         private readonly IBaseRepository<Multa> _repository;
+        private readonly IBaseRepository<ApplicationUser> _userRepository;
         private readonly DataDbContext _context;
         private readonly IMapper _mapper;
 
-        public MultaService(IBaseRepository<Multa> repository, IMapper mapper, DataDbContext context)
+        public MultaService(IBaseRepository<Multa> repository, IMapper mapper, DataDbContext context, IBaseRepository<ApplicationUser> userRepository)
         {
             _repository = repository;
             _mapper = mapper;
             _context = context;
+            _userRepository = userRepository;
         }
 
         public async Task<IEnumerable<TOutputModel>> GetAsync<TOutputModel>() where TOutputModel : class
@@ -96,7 +99,7 @@ namespace Application.Services
         }
 
 
-        public TOutputModel Update<TInputModel, TOutputModel, TValidator>(TInputModel inputModel)
+        public TOutputModel Update<TInputModel, TOutputModel, TValidator>(TInputModel inputModel, string? username)
             where TInputModel : class
             where TOutputModel : class
             where TValidator : AbstractValidator<Multa>
@@ -105,7 +108,10 @@ namespace Application.Services
             {
                 var entity = _mapper.Map<Multa>(inputModel) ?? throw new Exception("Erro de mapping.");
 
-                if (_repository.Select(entity.Id) is null) throw new Exception("Número do AIT não encontrado.");
+                var user = _userRepository.Select().FirstOrDefault(u => u.UserName == username);
+                if (user is not null && user.TipoUsuario != TipoUsuario.Administrador) throw new Exception("Apenas o administrador pode atualizar dados.");
+
+                if (_repository.Select(entity.Id) is null) throw new Exception("Multa não encontrada.");
 
                 Validation<TValidator>(entity);
 
@@ -118,11 +124,14 @@ namespace Application.Services
             catch (Exception) { throw; }
         }
 
-        public void Delete(Guid id)
+        public void Delete(Guid id, string? username)
         {
             try
             {
-                var entity = _repository.Select(id) ?? throw new Exception("Número do AIT não encontrado.");
+                var entity = _repository.Select(id) ?? throw new Exception("Multa não encontrada.");
+
+                var user = _userRepository.Select().FirstOrDefault(u => u.UserName == username);
+                if (user is not null && user.TipoUsuario != TipoUsuario.Administrador) throw new Exception("Apenas o administrador pode excluir dados.");
 
                 _repository.Delete(entity);
                 _context.SaveChanges();

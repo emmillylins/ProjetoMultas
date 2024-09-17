@@ -5612,11 +5612,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\khaleesi\\source\\repos\\ProjetoMultas\\backend\\Application\\Application.csproj",
+      "projectUniqueName": "C:\\Users\\khaleesi\\Downloads\\ProjetoMultas-main\\ProjetoMultas-main\\backend\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\Users\\khaleesi\\source\\repos\\ProjetoMultas\\backend\\Application\\Application.csproj",
+      "projectPath": "C:\\Users\\khaleesi\\Downloads\\ProjetoMultas-main\\ProjetoMultas-main\\backend\\Application\\Application.csproj",
       "packagesPath": "C:\\Users\\khaleesi\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\khaleesi\\source\\repos\\ProjetoMultas\\backend\\Application\\obj\\",
+      "outputPath": "C:\\Users\\khaleesi\\Downloads\\ProjetoMultas-main\\ProjetoMultas-main\\backend\\Application\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\khaleesi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5634,8 +5634,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\khaleesi\\source\\repos\\ProjetoMultas\\backend\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\khaleesi\\source\\repos\\ProjetoMultas\\backend\\Infrastructure\\Infrastructure.csproj"
+            "C:\\Users\\khaleesi\\Downloads\\ProjetoMultas-main\\ProjetoMultas-main\\backend\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\khaleesi\\Downloads\\ProjetoMultas-main\\ProjetoMultas-main\\backend\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
