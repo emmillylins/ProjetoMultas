@@ -9,7 +9,7 @@ namespace Infrastructure.Context
         public ModelBuilder Seed(ModelBuilder mdBuilder)
         {
             mdBuilder = SeedMulta(mdBuilder);
-            mdBuilder = SeedUsers(mdBuilder);
+            //mdBuilder = SeedUsers(mdBuilder);
 
             return mdBuilder;
         }
