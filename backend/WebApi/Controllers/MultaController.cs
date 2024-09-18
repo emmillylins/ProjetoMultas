@@ -10,7 +10,7 @@ namespace WebApi.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/multa")]
     public class MultaController : MainController
     {
         private readonly IMultaService _service;

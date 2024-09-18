@@ -10,7 +10,7 @@ namespace WebApi.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/auth")]
     public class AuthController : MainController
     {
         private readonly IConfiguration _configuration;
