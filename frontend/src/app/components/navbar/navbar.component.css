@@ -1,0 +1,46 @@
+/* Altura do container do Sidenav */
+.sidenav-container {
+    height: 100vh;
+    background-color: inherit;
+}
+
+/* Largura do Sidenav */
+.sidenav {
+    width: 200px;
+}
+
+/* Menu lateral: os links são organizados verticalmente */
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+    padding-left: 15px;
+}
+
+.menu-list a {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+.menu-icon {
+    margin-right: 1rem;
+    display: inline-block;
+}
+
+.project-title {
+    margin-left: 1rem;
+}
+
+.auth-links {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    margin-left: auto;
+}
+
+/* Oculta o botão e título quando o sidenav está aberto */
+.sidenav-open .menu-icon,
+.sidenav-open .project-title {
+    display: none;
+}

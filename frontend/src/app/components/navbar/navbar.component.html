@@ -1,0 +1,32 @@
+<!-- Container do Sidenav -->
+<mat-sidenav-container class="sidenav-container">
+    <!-- Sidenav lateral (lado esquerdo) -->
+    <mat-sidenav #sidenav mode="side" [opened]="false" class="sidenav" >
+        <!-- Conteúdo do menu lateral (links das páginas) -->
+        <mat-nav-list class="menu-list">
+            <a mat-list-item routerLink="/usuarios" style="display: block; margin-bottom: 10px;">Usuarios</a>
+            <a mat-list-item routerLink="/pagina2" style="display: block; margin-bottom: 10px;">Página 2</a>
+            <a mat-list-item routerLink="/pagina3" style="display: block; margin-bottom: 10px;">Página 3</a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Conteúdo principal -->
+    <mat-sidenav-content>
+        <!-- Navbar -->
+        <mat-toolbar color="primary" class="flex justify-center">
+            <!-- Ícone do menu, escondido quando sidenav estiver aberto -->
+            <button mat-icon-button (click)="sidenav.toggle()" class="mr-3 hidden-on-large">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <a routerLink="/" class="m-3">Projeto de Multas</a>
+            <div class="w-full"></div>
+            <div class="flex gap-5 items-center">
+                <a mat-button routerLink="/login">Login</a>
+                <a mat-button routerLink="/cadastro">Cadastrar</a>
+            </div>
+        </mat-toolbar>
+
+        <!-- Aqui vai o conteúdo da página -->
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
