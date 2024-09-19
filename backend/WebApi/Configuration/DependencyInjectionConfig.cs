@@ -24,6 +24,8 @@ namespace WebApi.Configuration
 
             services.AddScoped<IMultaService, MultaService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<AuthService>();
+
 
             //permite personalizar a documentação do Swagger conforme necessário.
             //services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();                       

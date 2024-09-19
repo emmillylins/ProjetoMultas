@@ -26,6 +26,7 @@ namespace WebApi
 
             services.AddControllers(options =>
             {
+                options.Filters.Add<CustomExceptionFilter>();
                 options.Filters.Add(new AuthorizeFilter()); // Aplica a autenticação a todas as rotas
             });
 
@@ -45,7 +46,6 @@ namespace WebApi
 
             services.Configure<IdentityOptions>(options =>
             {
-                // Configurações de senha, bloqueio e outros
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
@@ -81,19 +81,19 @@ namespace WebApi
                 });
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
                 {
+                    new OpenApiSecurityScheme
                     {
-                        new OpenApiSecurityScheme
+                        Reference = new OpenApiReference
                         {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer"
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
-                });
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    Array.Empty<string>()
+                }
+            });
             });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -108,6 +108,19 @@ namespace WebApi
                     ValidIssuer = Configuration["Jwt:Issuer"],
                     ValidAudience = Configuration["Jwt:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Secret"]))
+                };
+
+                // Optionally set the event handlers for token validation errors
+                options.Events = new JwtBearerEvents
+                {
+                    OnChallenge = context =>
+                    {
+                        context.HandleResponse();
+                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                        context.Response.ContentType = "application/json";
+                        var result = new { message = "Você não está autorizado a acessar este recurso." };
+                        return context.Response.WriteAsJsonAsync(result);
+                    }
                 };
             });
 
@@ -142,10 +155,13 @@ namespace WebApi
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseRouting();
+
             // Aplicar a política de CORS antes do middleware de autorização
             app.UseCors("AllowAllOrigins");
 
-            app.UseRouting();
+            // Middleware de tratamento de erros
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseAuthentication();  // Isso deve vir antes de UseAuthorization
             app.UseAuthorization();
@@ -158,7 +174,7 @@ namespace WebApi
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi");
             });
 
-            //limpar o cache do navegador
+            // Limpar o cache do navegador
             app.Use(async (context, next) =>
             {
                 context.Response.Headers["Cache-Control"] = "no-cache, no-store, must-revalidate";
@@ -173,4 +189,6 @@ namespace WebApi
             });
         }
     }
+
+
 }
