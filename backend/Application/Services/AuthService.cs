@@ -9,6 +9,9 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Domain.Enums;
+using System.Net;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Application.Services
 {
@@ -135,6 +138,17 @@ namespace Application.Services
 
             // 4. Gerar a string do token
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public bool AllowsAnonymousRoute(Endpoint endpoint)
+        {
+            if (endpoint == null) return false;
+
+            var allowAnonymousAttribute = endpoint.Metadata
+                .OfType<AllowAnonymousAttribute>()
+                .FirstOrDefault();
+
+            return allowAnonymousAttribute != null;
         }
 
     }
