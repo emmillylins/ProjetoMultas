@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebApi.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/auth")]
     public class AuthController : MainController
@@ -34,10 +33,26 @@ namespace WebApi.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)return CustomResponse(ModelState);
+                if (!ModelState.IsValid) return CustomResponse(ModelState);
 
                 var token = await _authService.Login(login);
                 return CustomResponse(token);
+            }
+            catch (Exception ex)
+            {
+                NotificarErro(ex.Message);
+                return CustomResponse();
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost("logout/{token}")]
+        public async Task<IActionResult> Logout(string token)
+        {
+            try
+            {
+                await _authService.Logout(token);
+                return CustomResponse("Logout realizado com sucesso.");
             }
             catch (Exception ex)
             {
@@ -64,6 +79,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("usuarios")]
         public async Task<ActionResult> ListarUsuarios()
         {

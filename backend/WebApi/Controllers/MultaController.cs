@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
-    [Authorize]
     [ApiController]
-    [Route("api/multa")]
+    [Route("api/multas")]
     public class MultaController : MainController
     {
         private readonly IMultaService _service;
@@ -21,6 +20,7 @@ namespace WebApi.Controllers
             _mapper = mapper;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult> Listar()
         {
@@ -36,6 +36,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<ActionResult> Obter(Guid id)
         {
@@ -51,6 +52,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Excluir(Guid id)
         {
@@ -67,6 +69,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> Inserir(CreateMultaDto dto)
         {
@@ -83,6 +86,7 @@ namespace WebApi.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpPut]
         public async Task<ActionResult> Atualizar(MultaDto dto)
         {

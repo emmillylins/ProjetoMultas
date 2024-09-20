@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using WebApi.Configuration;
+using WebApi.Config;
 
 namespace WebApi
 {
@@ -120,6 +120,11 @@ namespace WebApi
                         context.Response.ContentType = "application/json";
                         var result = new { message = "Você não está autorizado a acessar este recurso." };
                         return context.Response.WriteAsJsonAsync(result);
+                    },
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine($"Autenticação falhou: {context.Exception.Message}");
+                        return Task.CompletedTask;
                     }
                 };
             });
