@@ -11,8 +11,7 @@
 
 String de Conexão a ser configurada no appsettings.json.
 ### Comandos para front-end
-- cd ProjetoMultas\web
-- npm install, npm install @angular/material-moment-adapter moment
+- npm install
 - ng serve
 
 ### Comandos para manipulação da Migration no CLI (Command Line Interface)
