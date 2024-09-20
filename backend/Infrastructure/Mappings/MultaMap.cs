@@ -14,7 +14,8 @@ namespace Infrastructure.Mappings
             builder.Property(p => p.DataInfracao).HasColumnType("datetime2");
             builder.Property(p => p.CodigoInfracao).HasColumnType("varchar(50)");
             builder.Property(p => p.DescricaoInfracao).HasColumnType("varchar(50)");
-            builder.Property(p => p.PlacaVeículo).HasColumnType("varchar(10)");
+            builder.Property(p => p.PlacaVeiculo).HasColumnType("varchar(10)");
+            builder.Property(p => p.DataCriacao).HasColumnType("datetime2").HasDefaultValue(DateTime.Now);
 
             builder.Ignore(p => p.PermiteEdicao);
         }

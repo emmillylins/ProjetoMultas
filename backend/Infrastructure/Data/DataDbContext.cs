@@ -14,6 +14,7 @@ namespace Infrastructure.Context
 
         public DbSet<Multa> Multas { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<ApplicationUserToken> Tokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,7 +30,7 @@ namespace Infrastructure.Context
             builder.Entity<IdentityRoleClaim<string>>().ToTable("AspNetRoleClaim").HasNoKey();
 
             builder.Entity<IdentityUserRole<string>>().ToTable("AspNetUserRole").HasKey(ur => new { ur.UserId, ur.RoleId });
-            builder.Entity<IdentityUserToken<string>>().ToTable("AspNetUserToken").HasKey(t => new { t.UserId, t.LoginProvider, t.Name });
+            builder.Entity<ApplicationUserToken>().ToTable("AspNetUserToken").HasKey(t => new { t.UserId, t.DataCriacao, t.Value });
 
             base.OnModelCreating(builder);
 
@@ -38,6 +39,8 @@ namespace Infrastructure.Context
                 .SelectMany(p => p.GetProperties()
                     .Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
+
+            builder.Entity<ApplicationUserToken>().Property(t => t.Value).HasColumnType("varchar(500)").IsRequired();
 
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(p => p.GetForeignKeys()))
                 relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
