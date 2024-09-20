@@ -16,19 +16,22 @@
         <td mat-cell *matCellDef="let multa">{{ multa.numeroAIT }}</td>
       </ng-container>
 
-      <!-- Data e Hora da Infração Column -->
-      <ng-container matColumnDef="dataInfracao">
-        <th mat-header-cell *matHeaderCellDef>Data da Infração</th>
-        <td mat-cell *matCellDef="let multa">{{ multa.dataInfracao | date:'dd/MM/yyyy' }}</td>
-      </ng-container>
+    <!-- Data e Hora da Infração Column -->
+    <ng-container matColumnDef="dataInfracao">
+      <th mat-header-cell *matHeaderCellDef>Data da Infração</th>
+      <td mat-cell *matCellDef="let multa">
+        {{ multa.dataInfracao | date:'dd/MM/yyyy' }}
+      </td>
+    </ng-container>
 
-      <!-- Hora da Infração Column -->
-      <ng-container matColumnDef="horaInfracao">
-        <th mat-header-cell *matHeaderCellDef>Hora da Infração</th>
-        <td mat-cell *matCellDef="let multa">
-          {{ multa.dataInfracao ? (multa.dataInfracao | date:'HH:mm') : 'N/A' }}
-        </td>
-      </ng-container>
+    <!-- Hora da Infração Column -->
+    <ng-container matColumnDef="horaInfracao">
+      <th mat-header-cell *matHeaderCellDef>Hora da Infração</th>
+      <td mat-cell *matCellDef="let multa">
+        {{ multa.dataInfracao ? (multa.dataInfracao | date:'HH:mm') : 'N/A' }}
+      </td>
+    </ng-container>
+
 
       <!-- Código da Infração Column -->
       <ng-container matColumnDef="codigoInfracao">
@@ -69,7 +72,3 @@
     </div>
   </div>
 </div>
-
-<div>{{ '2024-09-19T14:30:00' | date:'HH:mm' }}</div>
-
-
