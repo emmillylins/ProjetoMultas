@@ -1,0 +1,31 @@
+/* Altura do container do Sidenav */
+.sidenav-container {
+    height: 100vh;
+    background-color: inherit;
+}
+
+#items-center {
+    margin-right: 15%;
+}
+
+/* Estilo para o Mat Menu */
+.mat-menu-panel {
+    display: flex;
+    flex-direction: column; /* Alinha os itens verticalmente */
+}
+
+/* Estilo dos itens do menu */
+.menu-item {
+    display: block; /* Garante que os itens ocupem toda a largura */
+    padding: 12px 16px; /* Ajuste o padding para dar mais espaço */
+    color: white;
+}
+
+.menu-item:not(:last-child) {
+    margin-bottom: 8px; /* Espaçamento entre os itens */
+}
+
+/* Opcional: Estilo de hover */
+.menu-item:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Cor de fundo ao passar o mouse */
+}

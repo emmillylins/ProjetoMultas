@@ -1,0 +1,15 @@
+#table {
+    background-color: rgba(49, 40, 51, 0.979);
+}
+
+h1 {
+    color: rgba(64, 51, 66, 0.979);
+    text-transform: uppercase;
+}
+
+.mt-4 button {
+    margin: 10px;
+    padding: 20px;
+    background-color: rgba(49, 40, 51, 0.979);
+    color: aliceblue;
+}

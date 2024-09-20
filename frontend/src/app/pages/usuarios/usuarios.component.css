@@ -1,0 +1,23 @@
+#table {
+  background-color: rgba(64, 56, 65, 0.979);
+}
+
+h1 {
+  color: rgba(88, 63, 92, 0.979);
+  text-transform: uppercase;
+}
+
+.mat-table {
+    width: 100%;
+  }
+  
+  th.mat-header-cell, td.mat-cell {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .mat-header-cell {
+    font-weight: bold;
+  }
+
+  

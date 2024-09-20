@@ -1,0 +1,36 @@
+<!-- src/app/user-list/user-list.component.html -->
+<div id="container" class="h-screen flex items-center justify-center">
+  <div class="shadow-md rounded-md p-5 bg-white w-4/5 max-w-4xl">
+    <h1 class="font-bold text-2xl mb-4 text-center">Lista de Usuários</h1>
+    <table id="table" mat-table [dataSource]="users" class="mat-elevation-z8">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let user; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+
+      <!-- Username Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef>Nome de Usuário</th>
+        <td mat-cell *matCellDef="let user">{{ user.userName }}</td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let user">{{ user.email }}</td>
+      </ng-container>
+
+      <!-- Tipo de Usuário Column -->
+      <ng-container matColumnDef="tipoUsuario">
+        <th mat-header-cell *matHeaderCellDef>Tipo de Usuário</th>
+        <td mat-cell *matCellDef="let user">
+          {{ user.tipoUsuario === 1 ? 'Administrador' : 'Comum' }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

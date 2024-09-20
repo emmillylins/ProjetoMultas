@@ -1,0 +1,43 @@
+<form [formGroup]="form" (ngSubmit)="onSave()" 
+class="form-container">
+  <div class="text-center">
+    <h1 class="font-bold text-2xl mb-2">
+        Editar multa
+    </h1>
+  </div>
+
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Número AIT</mat-label>
+      <input matInput formControlName="numeroAIT" placeholder="Digite o número AIT">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Data e Hora da Infração</mat-label>
+        <input matInput type="datetime-local" formControlName="dataInfracao" placeholder="Escolha a data e hora">
+      </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Código da Infração</mat-label>
+      <input matInput formControlName="codigoInfracao" placeholder="Digite o código da infração">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Descrição da Infração</mat-label>
+      <input matInput formControlName="descricaoInfracao" placeholder="Digite a descrição">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Placa do Veículo</mat-label>
+      <input matInput formControlName="placaVeiculo" placeholder="Digite a placa do veículo">
+    </mat-form-field>
+  
+    <div class="button-group">
+      <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">
+        Salvar
+      </button>
+      <button mat-button color="accent" (click)="onCancel()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+  

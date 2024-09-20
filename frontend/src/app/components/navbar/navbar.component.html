@@ -1,0 +1,28 @@
+<!-- Container do Sidenav -->
+<mat-sidenav-container class="sidenav-container">
+    <!-- Conteúdo principal -->
+    <mat-sidenav-content>
+        <!-- Navbar -->
+        <mat-toolbar color="primary" class="flex justify-between items-center">
+            <a routerLink="/" class="m-3">Projeto de Multas</a>
+            <div id="items-center" class="flex-grow text-center">
+                <a mat-button routerLink="/">Home</a>
+                <a mat-button routerLink="/usuarios">Usuários</a>
+                <a mat-button routerLink="/listar-multas">Multas</a>
+            </div>
+            <div class="flex items-center">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>account_circle</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button class="menu-item" mat-menu-item routerLink="/login">Login</button>
+                    <button class="menu-item" mat-menu-item routerLink="/cadastro">Cadastrar</button>
+                    <button class="menu-item" mat-menu-item (click)="sairDaConta()">Sair da conta</button>
+                 </mat-menu>
+            </div>
+        </mat-toolbar>
+
+        <!-- Aqui vai o conteúdo da página -->
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

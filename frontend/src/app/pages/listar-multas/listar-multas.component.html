@@ -1,0 +1,75 @@
+<div id="container" class="h-screen flex flex-col items-center justify-center">
+  <div class="shadow-md rounded-md p-5 bg-white w-4/5 max-w-4xl">
+    <h1 class="font-bold text-2xl mb-4 text-center">Lista de Multas</h1>
+
+    <!-- Tabela de Multas -->
+    <table id="table" mat-table [dataSource]="multas" class="mat-elevation-z8">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let multa; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+
+      <!-- Número AIT Column -->
+      <ng-container matColumnDef="numeroAIT">
+        <th mat-header-cell *matHeaderCellDef>Número AIT</th>
+        <td mat-cell *matCellDef="let multa">{{ multa.numeroAIT }}</td>
+      </ng-container>
+
+      <!-- Data e Hora da Infração Column -->
+      <ng-container matColumnDef="dataInfracao">
+        <th mat-header-cell *matHeaderCellDef>Data da Infração</th>
+        <td mat-cell *matCellDef="let multa">{{ multa.dataInfracao | date:'dd/MM/yyyy' }}</td>
+      </ng-container>
+
+      <!-- Hora da Infração Column -->
+      <ng-container matColumnDef="horaInfracao">
+        <th mat-header-cell *matHeaderCellDef>Hora da Infração</th>
+        <td mat-cell *matCellDef="let multa">
+          {{ multa.dataInfracao ? (multa.dataInfracao | date:'HH:mm') : 'N/A' }}
+        </td>
+      </ng-container>
+
+      <!-- Código da Infração Column -->
+      <ng-container matColumnDef="codigoInfracao">
+        <th mat-header-cell *matHeaderCellDef>Código da Infração</th>
+        <td mat-cell *matCellDef="let multa">{{ multa.codigoInfracao }}</td>
+      </ng-container>
+
+      <!-- Descrição da Infração Column -->
+      <ng-container matColumnDef="descricaoInfracao">
+        <th mat-header-cell *matHeaderCellDef>Descrição da Infração</th>
+        <td mat-cell *matCellDef="let multa">{{ multa.descricaoInfracao }}</td>
+      </ng-container>
+
+      <!-- Placa do Veículo Column -->
+      <ng-container matColumnDef="placaVeiculo">
+        <th mat-header-cell *matHeaderCellDef>Placa do Veículo</th>
+        <td mat-cell *matCellDef="let multa">{{ multa.placaVeiculo }}</td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let multa">
+          <button mat-button (click)="atualizarMulta(multa)">Editar</button>
+          <button mat-button color="warn" (click)="excluirMulta(multa.id)">Excluir</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <!-- Botão Adicionar Multa -->
+    <div class="mt-4 flex justify-center">
+      <button mat-raised-button color="primary" (click)="adicionarMulta()">
+        Adicionar Nova Multa
+      </button>
+    </div>
+  </div>
+</div>
+
+<div>{{ '2024-09-19T14:30:00' | date:'HH:mm' }}</div>
+
+
