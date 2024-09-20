@@ -126,9 +126,6 @@ export class ListarMultasComponent implements OnInit {
         if (result) {
           this.carregarMultas(); // Recarregar a lista de multas após o cadastro
         }
-        else {
-          alert('Erro ao cadastrar nova multa.')
-        }
       },
       error: (err) => {
         if (err.status === 400) {
