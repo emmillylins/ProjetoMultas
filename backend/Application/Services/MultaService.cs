@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+using Application.Interfaces;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Enums;
@@ -110,10 +110,10 @@ namespace Application.Services
                 var user = _userRepository.Select().FirstOrDefault(u => u.UserName == username);
                 if (user is not null && user.TipoUsuario != TipoUsuario.Administrador) throw new Exception("Apenas o administrador pode atualizar dados.");
 
-                if (_repository.Select(entity.Id) is null) throw new Exception("Multa não encontrada.");
-
+                var dbEntity = _repository.Select(entity.Id) ?? throw new Exception("Multa não encontrada.");
                 Validation<TValidator>(entity);
 
+                entity.DataCriacao = dbEntity.DataCriacao;
                 _repository.Update(entity);
                 _context.SaveChanges();
 
